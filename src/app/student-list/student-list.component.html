@@ -1,0 +1,16 @@
+<h2>Student List</h2>
+
+<ul>
+  <li *ngFor="let student of students" (click)="selectStudent(student)" [class.selected]="student === selectedStudent">
+    <a href="#">{{ student.JMBAG }}</a> - {{ student.ECTS }} ECTS - {{ student.paysForCollege ? 'pays' : 'does not pay' }}
+  </li>
+</ul>
+
+<div *ngIf="selectedStudent">
+  <h2>Student Details</h2>
+  <ul>
+    <li><strong>JMBAG:</strong> {{ selectedStudent.JMBAG }}</li>
+    <li><strong>ECTS:</strong> {{ selectedStudent.ECTS }}</li>
+    <li><strong>Pays for college:</strong> {{ selectedStudent.paysForCollege ? 'Yes' : 'No' }}</li>
+  </ul>
+</div>
