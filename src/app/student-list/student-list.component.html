@@ -1,16 +1,28 @@
 <h2>Student List</h2>
 
 <ul>
-  <li *ngFor="let student of students" (click)="selectStudent(student)" [class.selected]="student === selectedStudent">
-    <a href="#">{{ student.JMBAG }}</a> - {{ student.ECTS }} ECTS - {{ student.paysForCollege ? 'pays' : 'does not pay' }}
+  <li *ngFor="let student of students" (click)="navigateToDetails(student)" [class.selected]="student === selectedStudent">
+    <div class="student-info">
+      <div class="name">{{ student.name }} {{ student.lastName }}</div>
+      <div class="jmbag">{{ student.jmbag }}</div>
+      <div class="ects">{{ student.ects }} ECTS</div>
+      <div class="dateOfBirth">{{ student.birthDate }}</div>
+    </div>
+    <button (click)="deleteStudent(student)">Delete</button>
   </li>
 </ul>
 
-<div *ngIf="selectedStudent">
+<div *ngIf="selectedStudent" class="details">
   <h2>Student Details</h2>
   <ul>
-    <li><strong>JMBAG:</strong> {{ selectedStudent.JMBAG }}</li>
-    <li><strong>ECTS:</strong> {{ selectedStudent.ECTS }}</li>
-    <li><strong>Pays for college:</strong> {{ selectedStudent.paysForCollege ? 'Yes' : 'No' }}</li>
+    <li><strong>Name:</strong> {{ selectedStudent.name }}</li>
+    <li><strong>Last Name:</strong> {{ selectedStudent.lastName }}</li>
+    <li><strong>JMBAG:</strong> {{ selectedStudent.jmbag }}</li>
+    <li><strong>ECTS:</strong> {{ selectedStudent.ects }}</li>
+    <li><strong>Date of birth:</strong> {{ selectedStudent.birthDate }}</li>
   </ul>
+</div>
+
+<div>
+  <button [routerLink]="['/students/create']">Create Student</button>
 </div>

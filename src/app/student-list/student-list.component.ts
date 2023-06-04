@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService, Student } from '../student.service';
+import { Router } from '@angular/router';
+import { StudentService } from '../student.service';
+import { Student } from '../student/student.component';
 
 @Component({
   selector: 'app-student-list',
@@ -9,8 +11,10 @@ import { StudentService, Student } from '../student.service';
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
   selectedStudent: Student | undefined;
+  newStudent: Student = { jmbag: '', ects: 0, birthDate: '', name: '',
+  lastName: '', courses: [] };
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit() {
     this.getStudents();
@@ -25,5 +29,25 @@ export class StudentListComponent implements OnInit {
 
   selectStudent(student: Student) {
     this.selectedStudent = student;
+  }
+
+  navigateToDetails(student: Student) {
+    if (student.jmbag) {
+      console.log("I am here");
+      this.router.navigate(['/students/details', student.jmbag]);
+    }
+  }
+  deleteStudent(student: Student) {
+    this.router.navigate(['/students/delete', student.jmbag]);
+  }
+  
+  
+
+  createStudent() {
+    this.studentService.addStudent(this.newStudent).subscribe(student => {
+      this.students.push(student);
+      this.newStudent = { jmbag: '', ects: 0, birthDate: '', name: '',
+      lastName: '', courses: []};
+    });
   }
 }

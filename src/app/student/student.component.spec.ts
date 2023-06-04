@@ -24,14 +24,14 @@ describe('StudentComponent', () => {
   });
 
   it('should have empty JMBAG by default', () => {
-    expect(component.student.JMBAG).toEqual('');
+    expect(component.newStudent.jmbag).toEqual('');
   });
 
   it('should have null ECTS by default', () => {
-    expect(component.student.ECTS).toBeNull();
+    expect(component.newStudent.ects).toBeNull();
   });
 
   it('should have false paysForCollege by default', () => {
-    expect(component.student.paysForCollege).toBe(false);
+    expect(component.newStudent.birthDate).toEqual('');
   });
 });
